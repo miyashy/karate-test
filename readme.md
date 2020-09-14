@@ -8,3 +8,6 @@
 ```shell script
 ./gradlew test
 ```
+
+## レポートの確認
+./build/surefire-reports/karate-summary.htmlを開く
