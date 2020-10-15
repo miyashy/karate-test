@@ -7,8 +7,6 @@ plugins {
     kotlin("plugin.spring") version "1.3.72"
 }
 
-group = "com.github.miyashy"
-version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 configurations {
@@ -38,8 +36,18 @@ dependencies {
     testCompile ("net.masterthought:cucumber-reporting:3.8.0")
 }
 
-tasks.withType<Test> {
-    useJUnitPlatform()
+tasks.test {
+    useJUnitPlatform {
+        excludeTags("all")
+    }
+}
+
+task<Test>("parallelTest") {
+    description = "Runs test on parallel test runner."
+    group = "verification"
+    useJUnitPlatform {
+        includeTags("all")
+    }
 }
 
 tasks.withType<KotlinCompile> {
