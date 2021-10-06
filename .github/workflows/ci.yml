@@ -28,6 +28,6 @@ jobs:
           java-version: '11'
           cache: 'gradle'
       - name: Start spring boot
-        run: ./gradlew clean bootRun && sleep 10 &
+        run: ./gradlew clean bootRun && sleep 60 &
       - name: Run end to end test
-        run: ./gradlew clean parallelEndToEndTest
+        run: ./gradlew parallelEndToEndTest
