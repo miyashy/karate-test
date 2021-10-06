@@ -1,3 +1,4 @@
+import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -44,6 +45,9 @@ tasks.test {
     useJUnitPlatform {
         excludeTags("all")
     }
+    testLogging {
+        events(PASSED,SKIPPED,FAILED,STANDARD_OUT)
+    }
 }
 
 task<Test>("integrationTest") {
@@ -55,6 +59,9 @@ task<Test>("integrationTest") {
     }
     testClassesDirs = sourceSets["integrationTest"].output.classesDirs
     classpath = sourceSets["integrationTest"].runtimeClasspath
+    testLogging {
+        events(PASSED,SKIPPED,FAILED,STANDARD_OUT)
+    }
 }
 
 task<Test>("endToEndTest") {
@@ -66,6 +73,9 @@ task<Test>("endToEndTest") {
     }
     testClassesDirs = sourceSets["endToEndTest"].output.classesDirs
     classpath = sourceSets["endToEndTest"].runtimeClasspath
+    testLogging {
+        events(PASSED,SKIPPED,FAILED,STANDARD_OUT)
+    }
 }
 
 task<Test>("parallelEndToEndTest") {
@@ -76,6 +86,9 @@ task<Test>("parallelEndToEndTest") {
     }
     testClassesDirs = sourceSets["endToEndTest"].output.classesDirs
     classpath = sourceSets["endToEndTest"].runtimeClasspath
+    testLogging {
+        events(PASSED,SKIPPED,FAILED,STANDARD_OUT)
+    }
 }
 
 tasks.withType<KotlinCompile> {
