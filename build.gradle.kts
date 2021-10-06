@@ -14,7 +14,15 @@ repositories {
 }
 
 sourceSets {
+    create("integrationTest") {
+        compileClasspath += sourceSets.main.get().output
+        runtimeClasspath += sourceSets.main.get().output
+    }
     create("endToEndTest")
+}
+val integrationTestImplementation by configurations.getting {
+    extendsFrom(configurations.implementation.get())
+    extendsFrom(configurations.testImplementation.get())
 }
 val endToEndTestImplementation by configurations
 
@@ -28,6 +36,7 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    integrationTestImplementation ("com.intuit.karate:karate-junit5:1.1.0")
     endToEndTestImplementation ("com.intuit.karate:karate-junit5:1.1.0")
 }
 
@@ -35,6 +44,17 @@ tasks.test {
     useJUnitPlatform {
         excludeTags("all")
     }
+}
+
+task<Test>("integrationTest") {
+    description = "Runs end to end test."
+    group = "verification"
+
+    useJUnitPlatform {
+        excludeTags("all")
+    }
+    testClassesDirs = sourceSets["integrationTest"].output.classesDirs
+    classpath = sourceSets["integrationTest"].runtimeClasspath
 }
 
 task<Test>("endToEndTest") {
