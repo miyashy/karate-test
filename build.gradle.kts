@@ -23,9 +23,7 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation ("com.intuit.karate:karate-junit5:0.9.6")
-    testImplementation ("com.intuit.karate:karate-apache:0.9.6")
-    testImplementation ("net.masterthought:cucumber-reporting:3.8.0")
+    testImplementation ("com.intuit.karate:karate-junit5:1.1.0")
 }
 
 tasks.test {
