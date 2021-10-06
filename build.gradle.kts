@@ -13,6 +13,11 @@ repositories {
     mavenCentral()
 }
 
+sourceSets {
+    create("endToEndTest")
+}
+val endToEndTestImplementation by configurations
+
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -23,7 +28,7 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation ("com.intuit.karate:karate-junit5:1.1.0")
+    endToEndTestImplementation ("com.intuit.karate:karate-junit5:1.1.0")
 }
 
 tasks.test {
@@ -32,12 +37,25 @@ tasks.test {
     }
 }
 
-task<Test>("parallelTest") {
-    description = "Runs test on parallel test runner."
+task<Test>("endToEndTest") {
+    description = "Runs end to end test."
+    group = "verification"
+
+    useJUnitPlatform {
+        excludeTags("all")
+    }
+    testClassesDirs = sourceSets["endToEndTest"].output.classesDirs
+    classpath = sourceSets["endToEndTest"].runtimeClasspath
+}
+
+task<Test>("parallelEndToEndTest") {
+    description = "Runs parallel end to end test."
     group = "verification"
     useJUnitPlatform {
         includeTags("all")
     }
+    testClassesDirs = sourceSets["endToEndTest"].output.classesDirs
+    classpath = sourceSets["endToEndTest"].runtimeClasspath
 }
 
 tasks.withType<KotlinCompile> {
