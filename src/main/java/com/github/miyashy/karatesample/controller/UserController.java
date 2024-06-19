@@ -2,7 +2,6 @@ package com.github.miyashy.karatesample.controller;
 
 import com.github.miyashy.karatesample.domain.User;
 import com.github.miyashy.karatesample.service.UserService;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +17,7 @@ public class UserController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public User post(@RequestBody UserPostRequest request) {
-        return userService.add(request.getName());
+        return userService.add(request.name());
     }
 
     @DeleteMapping("/{id}")
@@ -27,8 +26,7 @@ public class UserController {
         userService.delete(id);
     }
 
-    @Data
-    public static class UserPostRequest {
-        private String name;
+    public record UserPostRequest(String name) {
     }
+
 }

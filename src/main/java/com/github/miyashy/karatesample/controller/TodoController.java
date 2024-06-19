@@ -2,7 +2,6 @@ package com.github.miyashy.karatesample.controller;
 
 import com.github.miyashy.karatesample.domain.Todo;
 import com.github.miyashy.karatesample.service.TodoService;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,12 +17,12 @@ public class TodoController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Todo post(@RequestBody TodoPostRequest request) {
-        return todoService.add(request.getUserId(), request.getDescription());
+        return todoService.add(request.userId(), request.description());
     }
 
     @PatchMapping("/{id}")
     public Todo put(@PathVariable UUID id, @RequestBody TodoPutRequest request) {
-        return todoService.changeStatus(id, request.getStatus());
+        return todoService.changeStatus(id, request.status());
     }
 
     @DeleteMapping("/{id}")
@@ -32,16 +31,12 @@ public class TodoController {
         todoService.delete(id);
     }
 
-    @Data
-    public static class TodoPostRequest {
-        private UUID userId;
-        private String description;
+    public record TodoPostRequest(UUID userId, String description) {
     }
 
-    @Data
-    public static class TodoPutRequest {
-        private Todo.TodoStatus status;
+    public record TodoPutRequest(Todo.TodoStatus status) {
     }
+
 }
 
 
