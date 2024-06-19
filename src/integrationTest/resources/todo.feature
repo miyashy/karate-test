@@ -1,6 +1,7 @@
 Feature: Todoのテスト
   Background:
-    * url 'http://localhost:9080'
+    * def port = karate.properties['port']
+    * url 'http://localhost:' + port
   Scenario: Todoを作成して変更、削除までできること
     Todo dataを作成してその内容を変更後に削除を行う
 

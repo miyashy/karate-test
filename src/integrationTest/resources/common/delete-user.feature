@@ -1,7 +1,9 @@
 @ignore
 Feature: 前提ユーザーの削除
   Background:
-    * url 'http://localhost:9080'
+    // Todo: 呼び元でURLを設定する
+    * def port = karate.properties['port']
+    * url 'http://localhost:' + port
   Scenario: ユーザーが削除されること
     Given path 'users', userId
     When method delete

@@ -1,6 +1,7 @@
 Feature: Userのテスト
   Background:
-    * url 'http://localhost:9080'
+    * def port = karate.properties['port']
+    * url 'http://localhost:' + port
   Scenario: ユーザーを作成して削除できること
     * def now = function(){ return java.lang.System.currentTimeMillis() }
     * def name = 'Test-' + now()

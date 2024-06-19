@@ -1,7 +1,9 @@
 @ignore
 Feature: 前提ユーザーの作成
   Background:
-    * url 'http://localhost:9080'
+    // Todo: 呼び元でURLを設定する
+    * def port = karate.properties['port']
+    * url 'http://localhost:' + port
   Scenario: ユーザーが作成されること
     * def now = function(){ return java.lang.System.currentTimeMillis() }
     * def name = 'Test-' + now()
