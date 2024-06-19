@@ -34,8 +34,8 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:1.18.30")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    integrationTestImplementation ("com.intuit.karate:karate-junit5:1.1.0")
-    endToEndTestImplementation ("com.intuit.karate:karate-junit5:1.1.0")
+    integrationTestImplementation ("com.intuit.karate:karate-junit5:1.4.1")
+    endToEndTestImplementation ("com.intuit.karate:karate-junit5:1.4.1")
 }
 
 tasks.test {
