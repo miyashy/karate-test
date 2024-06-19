@@ -1,11 +1,9 @@
 import org.gradle.api.tasks.testing.logging.TestLogEvent.*
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("org.springframework.boot") version "2.7.18"
     id("io.spring.dependency-management") version "1.1.5"
-    kotlin("jvm") version "1.5.31"
-    kotlin("plugin.spring") version "1.5.31"
+    kotlin("jvm") version "1.9.24"
 }
 
 java.sourceCompatibility = JavaVersion.VERSION_11
@@ -91,5 +89,5 @@ task<Test>("parallelEndToEndTest") {
 }
 
 tasks.wrapper {
-    gradleVersion = "7.2"
+    gradleVersion = "8.8"
 }
