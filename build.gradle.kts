@@ -6,7 +6,7 @@ plugins {
     kotlin("jvm") version "1.9.24"
 }
 
-java.sourceCompatibility = JavaVersion.VERSION_11
+java.sourceCompatibility = JavaVersion.VERSION_21
 
 repositories {
     mavenCentral()
