@@ -90,13 +90,6 @@ task<Test>("parallelEndToEndTest") {
     }
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "11"
-    }
-}
-
 tasks.wrapper {
     gradleVersion = "7.2"
 }
