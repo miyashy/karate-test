@@ -1,7 +1,6 @@
 package com.github.miyashy.karatesample.controller;
 
 import com.github.miyashy.karatesample.domain.Todo;
-import com.github.miyashy.karatesample.domain.TodoStatus;
 import com.github.miyashy.karatesample.service.TodoService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -41,7 +40,7 @@ public class TodoController {
 
     @Data
     public static class TodoPutRequest {
-        private TodoStatus status;
+        private Todo.TodoStatus status;
     }
 }
 
