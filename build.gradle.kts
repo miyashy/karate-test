@@ -1,12 +1,13 @@
 import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 
 plugins {
-    id("org.springframework.boot") version "2.7.18"
-    id("io.spring.dependency-management") version "1.1.5"
+    id("org.springframework.boot") version "3.5.3"
+    id("io.spring.dependency-management") version "1.1.4"
     kotlin("jvm") version "1.9.24"
 }
 
 java.sourceCompatibility = JavaVersion.VERSION_21
+java.targetCompatibility = JavaVersion.VERSION_21
 
 repositories {
     mavenCentral()
@@ -28,10 +29,10 @@ val endToEndTestImplementation by configurations
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
-    implementation("org.springdoc:springdoc-openapi-ui:1.5.13")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
-    compileOnly("org.projectlombok:lombok:1.18.32")
-    annotationProcessor("org.projectlombok:lombok:1.18.32")
+    compileOnly("org.projectlombok:lombok:1.18.34")
+    annotationProcessor("org.projectlombok:lombok:1.18.34")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     integrationTestImplementation ("com.intuit.karate:karate-junit5:1.4.1")
