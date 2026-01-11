@@ -14,7 +14,7 @@ public class RunAllTest {
     @Tag("all")
     @Test
     void runAllTest() {
-        Results results = Runner.path("classpass:").tags("~@ignore").parallel(1);
+        Results results = Runner.path("classpath:").tags("~@ignore").parallel(1);
         Assertions.assertEquals(0, results.getFailCount());
     }
 }
