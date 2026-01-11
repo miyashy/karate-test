@@ -24,7 +24,10 @@ val integrationTestImplementation by configurations.getting {
     extendsFrom(configurations.implementation.get())
     extendsFrom(configurations.testImplementation.get())
 }
-val endToEndTestImplementation by configurations
+val endToEndTestImplementation by configurations.getting {
+    extendsFrom(configurations.implementation.get())
+    extendsFrom(configurations.testImplementation.get())
+}
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
@@ -35,6 +38,7 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:1.18.34")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     integrationTestImplementation ("com.intuit.karate:karate-junit5:1.4.1")
     endToEndTestImplementation ("com.intuit.karate:karate-junit5:1.4.1")
 }
