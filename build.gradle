@@ -1,8 +1,8 @@
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 plugins {
-    id 'org.springframework.boot' version '3.5.3'
-    id 'io.spring.dependency-management' version '1.1.4'
+    id 'org.springframework.boot' version '4.0.1'
+    id 'io.spring.dependency-management' version '1.1.7'
     id 'java'
 }
 
@@ -28,6 +28,15 @@ configurations {
     integrationTestRuntimeOnly.extendsFrom runtimeOnly, testRuntimeOnly
     endToEndTestImplementation.extendsFrom implementation, testImplementation
     endToEndTestRuntimeOnly.extendsFrom runtimeOnly, testRuntimeOnly
+
+    // E2EテストではKarate互換性のためJUnit 5.xを固定
+    endToEndTestImplementation {
+        resolutionStrategy {
+            force 'org.junit.jupiter:junit-jupiter-api:5.12.2'
+            force 'org.junit.jupiter:junit-jupiter-engine:5.12.2'
+            force 'org.junit.platform:junit-platform-launcher:1.12.2'
+        }
+    }
 }
 
 dependencies {
