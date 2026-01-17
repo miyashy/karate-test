@@ -1,0 +1,39 @@
+{
+  "plansDirectory": "./.plans",
+  "permissions": {
+    "allow": [
+      "Bash(./gradlew:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git branch:*)",
+      "Bash(git checkout:*)",
+      "Bash(git switch:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git pull:*)",
+      "Bash(git fetch:*)",
+      "Bash(git rebase:*)",
+      "Bash(git merge:*)",
+      "Bash(git stash:*)",
+      "Bash(git reset:*)",
+      "Bash(git restore:*)",
+      "Bash(git show:*)",
+      "Bash(git tag:*)",
+      "Bash(git push:*)",
+      "Bash(gh:*)"
+    ],
+    "deny": [
+      "Read(./.gradle/**)",
+      "Read(./build/**)",
+      "Read(./.git/objects/**)",
+      "Read(./.idea/**)",
+      "Read(.env)",
+      "Read(.env.*)",
+      "Read(./secrets/**)",
+      "Bash(rm -rf:*)",
+      "Bash(sudo:*)",
+      "Bash(chmod 777:*)"
+    ]
+  }
+}
