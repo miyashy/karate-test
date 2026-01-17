@@ -1,0 +1,29 @@
+{
+  "name": "Java Spring Boot Development",
+  "dockerFile": "Dockerfile",
+  "customizations": {
+    "intellij": {
+      "plugins": [
+        "com.intellij.java",
+        "org.jetbrains.plugins.gradle",
+        "com.intellij.spring",
+        "com.intellij.spring.boot",
+        "Docker"
+      ]
+    }
+  },
+  "remoteUser": "devuser",
+  "mounts": [
+    "source=${localWorkspaceFolder}/.gradle,target=/home/devuser/.gradle,type=bind,consistency=cached"
+  ],
+  "features": {
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "21",
+      "installMaven": "false",
+      "installGradle": "false"
+    },
+    "ghcr.io/devcontainers/features/git:1": {
+      "version": "latest"
+    }
+  }
+}
