@@ -32,3 +32,9 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### JEnv ###
+.java-version
+
+### Claude ###
+.plans
