@@ -18,12 +18,22 @@ Spring Boot 4.0.1とKarateを使用したREST APIのサンプルプロジェク�
 
 ## ビルドとテスト実行コマンド
 
+### PostgreSQLの起動
+```shell
+docker-compose up -d
+```
+- データベース: karatetest
+- ポート: 5432
+- ユーザー/パスワード: postgres/postgres
+- **初回起動時**: `schema.sql`が自動的に実行されテーブルが作成されます
+
 ### アプリケーションの起動
 ```shell
 ./gradlew bootRun
 ```
 - デフォルトポート: 9080
 - Swagger UI: http://127.0.0.1:9080/swagger-ui.html
+- **注意**: PostgreSQLが起動している必要があります
 
 ### テストの実行
 ```shell
@@ -31,12 +41,15 @@ Spring Boot 4.0.1とKarateを使用したREST APIのサンプルプロジェク�
 ./gradlew test
 
 # 統合テスト (アプリケーションを起動してKarateテストを実行)
+# 注意: 事前にdocker-compose up -dでPostgreSQLを起動しておく必要があります
 ./gradlew integrationTest
 
 # E2Eテスト (個別実行)
+# 注意: 別ターミナルで./gradlew bootRunを実行してアプリケーションを起動しておく必要があります
 ./gradlew endToEndTest
 
 # E2Eテスト (並列実行)
+# 注意: 別ターミナルで./gradlew bootRunを実行してアプリケーションを起動しておく必要があります
 ./gradlew parallelEndToEndTest
 ```
 
@@ -59,7 +72,9 @@ Spring Boot 4.0.1とKarateを使用したREST APIのサンプルプロジェク�
 - **Domain層** (`domain/`): エンティティとリポジトリインターフェースを定義
   - エンティティ: `Todo`, `User` - イミュータブルな設計で、ファクトリメソッドと更新メソッドを提供
   - リポジトリインターフェース: `TodoRepository`, `UserRepository`
-- **Infrastructure層** (`infrastructure/`): リポジトリの実装。現在はインメモリのHashMapを使用
+- **Infrastructure層** (`infrastructure/`): リポジトリの実装
+  - `persistence/`: 永続化用エンティティ(`UserEntity`, `TodoEntity`)とSpring Data JDBCリポジトリ(`UserJdbcRepository`, `TodoJdbcRepository`)
+  - アダプター: ドメインリポジトリインターフェースの実装(`UserRepositoryAdapter`, `TodoRepositoryAdapter`)で、ドメインエンティティと永続化エンティティを変換
 
 ### テスト構成
 
@@ -85,7 +100,13 @@ Spring Boot 4.0.1とKarateを使用したREST APIのサンプルプロジェク�
 
 ### データの永続化
 
-現在、TodoとUserのデータは`HashMap`を使用したインメモリストレージに保存されています。アプリケーションの再起動でデータは失われます。
+TodoとUserのデータはPostgreSQLデータベースに保存されます。
+
+- **データベース**: PostgreSQL 16
+- **アクセス方法**: Spring Data JDBC
+- **スキーマ**: `schema.sql`で定義（プロジェクトルート）
+- **テーブル**: `users`, `todos`
+- **永続化層の設計**: ドメインエンティティ(`Todo`, `User`)と永続化エンティティ(`TodoEntity`, `UserEntity`)を分離したアダプターパターンを採用
 
 ## 開発時の注意点
 

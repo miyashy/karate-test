@@ -10,7 +10,7 @@ public class Todo {
     private UUID userId;
     private String description;
 
-    private Todo(UUID id, TodoStatus status, UUID userId, String description) {
+    public Todo(UUID id, TodoStatus status, UUID userId, String description) {
         this.id = id;
         this.status = status;
         this.userId = userId;

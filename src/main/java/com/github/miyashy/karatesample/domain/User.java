@@ -14,4 +14,11 @@ public class User {
         user.name = name;
         return user;
     }
+
+    public static User newUser(UUID id, String name) {
+        User user = new User();
+        user.id = id;
+        user.name = name;
+        return user;
+    }
 }
