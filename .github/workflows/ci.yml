@@ -14,6 +14,8 @@ jobs:
           distribution: 'zulu'
           java-version: '21'
           cache: 'gradle'
+      - name: Start PostgreSQL
+        run: docker compose up -d --wait
       - name: Run integration test
         run: ./gradlew clean integrationTest
 
@@ -27,9 +29,11 @@ jobs:
           distribution: 'zulu'
           java-version: '21'
           cache: 'gradle'
+      - name: Start PostgreSQL
+        run: docker compose up -d --wait
       - name: Start spring boot
         run: ./gradlew clean bootRun &
-      - name: wait for startup spring boot
+      - name: Wait for startup spring boot
         run: sleep 30
       - name: Run end to end test
         run: ./gradlew parallelEndToEndTest
